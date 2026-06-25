@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG棋牌 · 知识库导览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f2f4f6;
+            color: #1e2a3a;
+            line-height: 1.7;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 目录式头部 */
+        .hero {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #d8dee4;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0b1c2e;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #5e6f7e;
+            background-color: #e6eaee;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            margin-left: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .hero p {
+            margin-top: 0.6rem;
+            color: #3c4a5a;
+            max-width: 700px;
+            font-size: 1rem;
+        }
+
+        /* 网格卡片容器 — 目录感布局 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 14px;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e7ed;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cdd5de;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #142433;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card h2 .badge {
+            font-size: 0.65rem;
+            background-color: #e6eaef;
+            color: #3f5367;
+            padding: 0.15rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2d3f52;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li::before {
+            content: "·";
+            color: #7c8b9c;
+            font-weight: bold;
+            display: inline-block;
+            width: 1.2rem;
+        }
+
+        .card a {
+            color: #1f5f8e;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .card a:hover {
+            border-bottom-color: #1f5f8e;
+        }
+
+        /* 提示区 — 独立卡片强调 */
+        .notice-area {
+            background-color: #f8fafc;
+            border: 1px solid #dce2e9;
+            border-radius: 14px;
+            padding: 1.8rem 2rem;
+            margin: 1.8rem 0 2.2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .notice-area .icon-symbol {
+            font-size: 1.5rem;
+            line-height: 1;
+            background: #e2e9f1;
+            border-radius: 30px;
+            padding: 0.2rem 0.9rem;
+            color: #1d3c5a;
+            font-weight: 500;
+        }
+
+        .notice-content {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .notice-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: #142433;
+        }
+
+        .notice-content p {
+            color: #345067;
+            font-size: 0.95rem;
+        }
+
+        .notice-content a {
+            color: #1f5f8e;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #bccbd9;
+        }
+
+        /* 相关信息区 — 紧凑版块 */
+        .related-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #dbe1e8;
+        }
+
+        .related-item {
+            flex: 1 1 160px;
+            background: #ffffff;
+            border: 1px solid #e4e9ef;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .related-item h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #556b7b;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .related-item p, .related-item a {
+            font-size: 0.92rem;
+            color: #1f3f5a;
+        }
+
+        .related-item a {
+            border-bottom: 1px dotted #b5c6d6;
+            text-decoration: none;
+        }
+
+        .related-item a:hover {
+            border-bottom-color: #1f5f8e;
+        }
+
+        /* 页脚 */
+        .page-footer {
+            margin-top: 3rem;
+            padding: 1.2rem 0;
+            border-top: 1px solid #d8dfe7;
+            font-size: 0.85rem;
+            color: #5d7385;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.8rem;
+        }
+
+        .page-footer a {
+            color: #2d5b7f;
+            text-decoration: none;
+            border-bottom: 1px dotted #b7c8d9;
+        }
+
+        .page-footer a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero h1 small {
+                font-size: 0.75rem;
+                padding: 0.1rem 0.6rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .notice-area {
+                padding: 1.2rem;
+                flex-direction: column;
+            }
+            .related-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- hero + 目录标题 -->
+    <header class="hero">
+        <h1>
+            📚 棋牌知识库
+            <small>主题索引</small>
+        </h1>
+        <p>
+            从规则演变、术语释义到平台观察，围绕「棋牌」主题搭建的结构化笔记。
+            本页作为入口导览，帮助你快速定位感兴趣的内容板块。
+        </p>
+    </header>
+
+    <!-- 目录感卡片网格：说明区 / 背景词条 / 场景等 -->
+    <div class="knowledge-grid">
+        <!-- 卡片 1：主题说明 -->
+        <div class="card">
+            <h2>📖 主题概述 <span class="badge">说明</span></h2>
+            <p>
+                「棋牌」一词涵盖传统棋类与牌类游戏，其背后是策略、概率与社交的多重融合。
+                现代数字棋牌在保留经典规则的同时，也演化出多种竞技与休闲形态。
+            </p>
+            <p>
+                本站点聚焦于棋牌领域的知识整理，包括基础规则、术语辨析、常见模式以及信息索引。
+                你可以将这里看作一个静态的知识锚点。
+            </p>
+        </div>
+
+        <!-- 卡片 2：关键特点 / 构成 -->
+        <div class="card">
+            <h2>🧩 特点与构成</h2>
+            <ul>
+                <li>规则明确，对局节奏由参与者自主掌控</li>
+                <li>涵盖从一对一到大满贯等多种参与规模</li>
+                <li>逻辑与心理博弈并存，观赏性与参与性俱佳</li>
+                <li>数字平台普遍提供练习、好友对战等功能</li>
+            </ul>
+            <p style="margin-top: 0.6rem;">
+                <a href="https://index-bgqipai.com">bg棋牌</a> 作为棋牌主题站点，持续收录相关说明与参考。
+            </p>
+        </div>
+
+        <!-- 卡片 3：常见场景 -->
+        <div class="card">
+            <h2>🎯 常见场景</h2>
+            <ul>
+                <li>线下聚会中的传统牌局与棋类对弈</li>
+                <li>在线平台上的快速匹配与好友约战</li>
+                <li>赛事直播及棋牌文化讨论社区</li>
+                <li>规则学习与策略复盘</li>
+            </ul>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #4b6278;">
+                不同场景侧重不同，但均围绕同一套底层逻辑展开。
+            </p>
+        </div>
+
+        <!-- 卡片 4：术语/小知识 -->
+        <div class="card">
+            <h2>📌 术语摘录</h2>
+            <ul>
+                <li><strong>底牌</strong> — 对局中不公开的牌，作为策略变量</li>
+                <li><strong>让先</strong> — 棋类中弱势方获得先手调整</li>
+                <li><strong>加倍</strong> — 牌局中增加当前分数的行动</li>
+                <li><strong>复盘</strong> — 对局结束后回顾关键决策</li>
+            </ul>
+            <p style="margin-top: 0.6rem;">
+                以上仅为极少部分，完整词表可在相关板块中查阅。
+            </p>
+        </div>
+    </div>
+
+    <!-- 提示区：使用说明 / 注意事项 -->
+    <div class="notice-area">
+        <span class="icon-symbol">ⓘ</span>
+        <div class="notice-content">
+            <h3>使用提示</h3>
+            <p>
+                本站所有内容均基于公开资料与通用知识整理，不构成任何形式的建议或诱导。
+                关于平台的具体信息，请直接参考 <a href="https://index-bgqipai.com">bg棋牌</a> 上的原始说明。
+                建议结合自身理解进行判断，并留意规则差异与时效性。
+            </p>
+        </div>
+    </div>
+
+    <!-- 相关信息区：FAQ摘要 / 外部关联 -->
+    <div class="related-section">
+        <div class="related-item">
+            <h4>❓ FAQ 摘要</h4>
+            <p><strong>Q：</strong> 如何快速了解一种不熟悉的棋牌游戏？<br>
+                <strong>A：</strong> 从核心目标、牌/子数量、胜负判定入手，通常三分钟内可掌握轮廓。
+            </p>
+            <p style="margin-top: 0.3rem;"><strong>Q：</strong> 线上平台与线下规则完全一致吗？<br>
+                <strong>A：</strong> 大部分一致，但可能存在细微调整，建议以平台公示为准。
+            </p>
+        </div>
+        <div class="related-item">
+            <h4>🔗 相关信息</h4>
+            <p>
+                棋牌文化演变 · 常见术语对照 · 游戏模式分类<br>
+                更多内容可参考 <a href="https://index-bgqipai.com">bg棋牌</a> 中的主题页面。
+            </p>
+        </div>
+        <div class="related-item">
+            <h4>📂 内容范畴</h4>
+            <p>
+                本知识库包含规则说明、背景介绍、术语解释及索引链接。
+                不收录实时数据、不提供下载或注册引导，仅作信息参考。
+            </p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="page-footer">
+        <span>知识库入口 · 内容仅供学习参考</span>
+        <span><a href="https://index-bgqipai.com">bg棋牌</a> 主题站点</span>
+    </footer>
+
+</div>
+</body>
+</html>
